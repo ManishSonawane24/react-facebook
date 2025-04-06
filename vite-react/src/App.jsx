@@ -1,7 +1,8 @@
-
+import Test from './test.jsx';
 function App() {
   return (
-    <h1> Hello Bhai Log , Kya Hal Chal</h1>
+    // <h1> Hello Bhai Log , Kya Hal Chal</h1>
+    <Test/>
   )
 }
 
