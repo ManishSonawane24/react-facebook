@@ -2,7 +2,7 @@
 const CardNew = ({title, texts,btntxt="Visit Now"}) => {  
   return (
     <>
-    < div className="max-w-xs rounded-md shadow-md bg-black text-gray-100">
+    < div className="max-w-xs rounded-md shadow-md bg-black text-gray-100 mb-4">
         <img
           src="https://images.pexels.com/photos/31418054/pexels-photo-31418054/free-photo-of-black-and-white-pagoda-street-scene-photography.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt=""
