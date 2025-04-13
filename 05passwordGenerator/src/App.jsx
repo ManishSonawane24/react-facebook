@@ -1,11 +1,14 @@
-import { useState, useCallback ,useEffect} from 'react'
+import { useState, useCallback ,useEffect, useRef} from 'react'
 import './App.css'  
 function App() {
   const [length, setLength] = useState(8)
   const [numbersAllowed, setNumbersAllowed] = useState(false)
   const [charAllowed, setcharAllowed] = useState(false)
-
   const [password, setPassword] = useState("")
+
+  // useRef is used to create a mutable object that holds a value that does not cause re-renders when changed
+  // useRef is used to create a reference to the password input field so that we can copy the password to clipboard
+  const passwordRef = useRef(null)
 
   const  passwordGenerator = useCallback(() => { // useCallback is used to memoize the function that is unless the dependencies change , it will not be recreated
       // passwordGenerator function will execute when the dependencies change that are length, numbersAllowed, charAllowed
@@ -26,6 +29,12 @@ function App() {
 
   },[length, numbersAllowed, charAllowed, setPassword])
 
+  const copyPasswordToClipboard = useCallback(() => {
+    passwordRef.current?.select() // select the password input field
+    window.navigator.clipboard.writeText(password)
+  },[password])
+
+  // useEffect is used to call the passwordGenerator function when the dependencies change
 useEffect(() => { passwordGenerator() }, [length,numbersAllowed, charAllowed,passwordGenerator] )
 
   return (
@@ -40,8 +49,10 @@ useEffect(() => { passwordGenerator() }, [length,numbersAllowed, charAllowed,pas
           className='text-orange-500 bg-white outline-none w-full py-1 px-3'
           placeholder='password'
           readOnly
+          ref={passwordRef} // ref is used to create a reference to the password input field so that we can copy the password to clipboard
            />
            <button
+           onClick={copyPasswordToClipboard}
            className='outline-none bg-blue-500 text-white py-1 px-3 shrink-0'
            >Copy</button>
         </div>
